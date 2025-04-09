@@ -1,4 +1,4 @@
-# Shoppy
+# NOVA - shopping mall
 
 - React
 - Tailwind CSS

@@ -1,5 +1,13 @@
+import { Outlet } from "react-router-dom";
+import Header from "./components/Header";
+
 function App() {
-  return <>Hello Shoppy</>;
+  return (
+    <>
+      <Header />
+      <Outlet />
+    </>
+  );
 }
 
 export default App;
