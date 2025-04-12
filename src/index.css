@@ -12,8 +12,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-items: center;
-  background-color: rgb(24 24 27 / var(--tw-bg-opacity));
+  background-color: "#FFFFFF";
   font: rgb(249 250 251 / var(--tw-text-opacity));
+  font-family: "Neue-Helvetica", "Helvetica", "Arial", Sans-Serif;
 }
 
 #root {

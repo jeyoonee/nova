@@ -8,6 +8,8 @@ import Home from "./pages/Home";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
+import Edit from "./pages/Edit";
+import { UserProvider } from "./context/UserContext";
 
 const router = createBrowserRouter([
   {
@@ -19,12 +21,15 @@ const router = createBrowserRouter([
       { path: "products", element: <Products /> },
       { path: "products/:id", element: <ProductDetail /> },
       { path: "cart", element: <Cart /> },
+      { path: "edit", element: <Edit /> },
     ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </StrictMode>
 );
