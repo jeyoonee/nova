@@ -20,7 +20,7 @@ export default function Header() {
   return (
     <header className="flex w-full justify-between h-[245px] px-[48px] py-[20px]">
       <Link to="/">
-        <img src="logo.png" alt="nova logo" className="w-[262px] h-[109px]" />
+        <img src="/logo.png" alt="nova logo" className="w-[262px] h-[109px]" />
       </Link>
       <div className="text-[0.6875rem] font-light tracking-[0.05rem]">
         <Link to="products" className="mr-6 cursor-pointer">
