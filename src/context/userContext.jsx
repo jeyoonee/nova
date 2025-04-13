@@ -9,13 +9,14 @@ import { createContext, useContext, useEffect, useState } from "react";
 const UserContext = createContext();
 
 export function UserProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(undefined);
 
   useEffect(() => {
     const unsubscribe = subscribeToAuth(async (firebaseUser) => {
       if (firebaseUser) {
         const isAdmin = await getUserRole(firebaseUser.uid);
-        setUser({ ...firebaseUser, isAdmin }); // isAdmin: true / false
+        console.log(1, isAdmin);
+        setUser({ ...firebaseUser, isAdmin });
       } else {
         setUser(null);
       }

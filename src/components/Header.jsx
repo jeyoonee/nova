@@ -7,12 +7,7 @@ import {
 import { useUser } from "../context/UserContext";
 
 export default function Header() {
-  // const [user, setUser] = useState(null);
   const { user } = useUser();
-
-  // const getUserDoc = async () => await getDoc(doc(db, "users", user.uid));
-  // const userDoc = getUserDoc();
-  // const isAdmin = userDoc.exists() ? userDoc.data().isAdmin : false;
 
   const handleAuthClick = () => {
     if (user) {
@@ -28,11 +23,12 @@ export default function Header() {
         <img src="logo.png" alt="nova logo" className="w-[262px] h-[109px]" />
       </Link>
       <div className="text-[0.6875rem] font-light tracking-[0.05rem]">
-        <Link to="products" className="mr-6">
+        <Link to="products" className="mr-6 cursor-pointer">
           PRODUCTS
         </Link>
+
         {user?.isAdmin && (
-          <Link to="edit" className="mr-6">
+          <Link to="edit" className="mr-6 cursor-pointer">
             EDIT
           </Link>
         )}
@@ -40,7 +36,16 @@ export default function Header() {
         <span className="mr-6 cursor-pointer" onClick={handleAuthClick}>
           {user ? "LOG OUT" : "LOG IN"}
         </span>
-        <Link to="cart">SHOPPING BAG [0]</Link>
+
+        {user ? (
+          <Link to="cart" className="cursor-pointer">
+            SHOPPING BAG [0]
+          </Link>
+        ) : (
+          <span onClick={handleAuthClick} className="cursor-pointer">
+            SHOPPING BAG [0]
+          </span>
+        )}
       </div>
     </header>
   );
