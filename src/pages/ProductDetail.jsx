@@ -36,13 +36,7 @@ export default function ProductDetail() {
       />
       <h3 className="font-semibold text-lg">{product.name}</h3>
       <p className="text-sm text-gray-600">{product.description}</p>
-      <p className="mt-2 font-bold">
-        {product.price.toLocaleString("en-AU", {
-          style: "currency",
-          currency: "JPY",
-        })}
-        원
-      </p>
+      <p className="mt-2 ">$ {product.price.toLocaleString()}</p>
     </>
   );
 }

@@ -34,7 +34,6 @@ export default function Products() {
       ) : (
         <ul className="grid grid-cols-2 md:grid-cols-4 gap-[3rem] p-0">
           {products.map((product) => (
-            // todo: ProductCard 컴포넌트로 분리
             <ProductCard
               id={product.id}
               name={product.name}
