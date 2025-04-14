@@ -43,7 +43,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="text-[0.6875rem] font-light tracking-[0.05rem] flex justify-center">
+    <footer className="mt-20 text-[0.6875rem] font-light tracking-[0.05rem] flex justify-center">
       <div>
         <p>JOIN OUR NEWSLETTER</p>
         {sns.map((el, idx) => (

@@ -17,6 +17,10 @@ export default function Header() {
     }
   };
 
+  const getLocalCart = () => {
+    return JSON.parse(localStorage.getItem("cart")) || [];
+  };
+
   return (
     <header className="flex w-full justify-between h-[245px] px-[48px] py-[20px]">
       <Link to="/">
