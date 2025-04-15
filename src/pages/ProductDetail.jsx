@@ -58,33 +58,57 @@ export default function ProductDetail() {
   if (!product) return <p>상품 정보를 찾을 수 없습니다.</p>;
 
   return (
-    <>
+    <section className="flex flex-col lg:flex-row px-12 w-full max-w-screen-xl m-auto gap-12 py-8">
       <img
         src={product.imageUrl}
         alt={product.name}
-        className="w-full h-48 object-cover mb-2"
+        className="basis-1/3 aspect-[2/3] w-full object-cover"
       />
-      <h3 className="font-semibold text-lg">{product.name}</h3>
-      <p className="text-sm text-gray-600">{product.description}</p>
-      <p className="mt-2 ">$ {product.price.toLocaleString()}</p>
 
-      {product.options.length > 0 ? (
-        <select
-          name="options"
-          onChange={handleChange}
-          value={cartItem?.option || ""}
+      <div className="flex flex-col text-[#000000] ml-[58px] w-full pt-12 pr-5 basis-2/3 gap-[2rem] font-light">
+        <div className="border-b-[0.03125rem] pb-[2rem]">
+          <h1 className=" text-[18px]">{product.name}</h1>
+          <span className="mb-4 text-[16px]">$ {product.price.toFixed(2)}</span>
+        </div>
+
+        {product.options.length > 0 ? (
+          <select
+            name="options"
+            onChange={handleChange}
+            value={cartItem?.option || ""}
+          >
+            {product.options.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <></>
+        )}
+
+        <button
+          className="w-full h-10 border-[0.03125rem] text-[11px] cursor-pointer"
+          onClick={() => addToCart(cartItem)}
         >
-          {product.options.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-      ) : (
-        <></>
-      )}
+          ADD
+        </button>
 
-      <button onClick={() => addToCart(cartItem)}>ADD</button>
-    </>
+        <p className="text-xs">{product.description}</p>
+
+        <div className="text-[10px]">
+          <span className="mb-3 cursor-pointer">PRODUCT MEASUREMENTS</span>
+          <span className="mb-3 cursor-pointer">
+            COMPOSITION, CARE & ORIGIN
+          </span>
+          <span className="mb-3 cursor-pointer">
+            CHECK IN-STORE AVAILABILITY
+          </span>
+          <span className=" cursor-pointer">
+            SHIPPING, EXCHANGES AND RETURNS
+          </span>
+        </div>
+      </div>
+    </section>
   );
 }

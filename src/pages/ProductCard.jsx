@@ -6,7 +6,7 @@ export default function ProductCard({ id, imageUrl, name, price }) {
   return (
     <li
       key={id}
-      className="p-0 text-[11px] text-[#000000] cursor-pointer"
+      className="p-0 text-[11px] text-[#000000] ∂cursor-pointer"
       onClick={() => navigate(`${id}`)}
     >
       <div className="w-full aspect-[2/3] overflow-hidden">

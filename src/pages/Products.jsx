@@ -1,7 +1,6 @@
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../firebaseConfig";
-import { useNavigate } from "react-router-dom";
 import ProductCard from "./ProductCard";
 
 export default function Products() {
