@@ -32,7 +32,6 @@ export const getUserRole = async (uid) => {
   const isAdmin = snap.exists() ? snap.data().isAdmin === true : false;
 
   localStorage.setItem(`admin:${uid}`, isAdmin.toString());
-  console.log("로스", localStorage.getItem(`admin:${uid}`));
 
   return isAdmin;
 };

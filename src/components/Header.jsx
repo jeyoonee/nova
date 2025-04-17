@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, onSnapshot, doc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { Link } from "react-router-dom";
 import {
@@ -6,6 +6,7 @@ import {
   logout,
   subscribeToAuth,
 } from "../services/authService";
+import { getLocalCart } from "../services/cartService";
 import { useUser } from "../context/UserContext";
 import { useEffect, useState } from "react";
 
@@ -16,21 +17,32 @@ export default function Header() {
 
   useEffect(() => {
     const fetchCart = async () => {
-      try {
-        const snapshot = await getDocs(collection(db, "carts"));
-        const items = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setCartItems(items[0].items);
-      } catch (error) {
-        console.error("장바구니 불러오기 실패:", error);
-      } finally {
+      if (!user) {
+        const localItems = getLocalCart();
+        setCartItems(localItems);
         setIsLoading(false);
+      } else {
+        const unsubscribe = onSnapshot(
+          doc(db, "carts", user.uid),
+          (docSnap) => {
+            if (docSnap.exists()) {
+              const items = docSnap.data().items || [];
+
+              setCartItems([...items, ...cartItems]);
+            } else {
+              setCartItems([...cartItems]);
+            }
+
+            setIsLoading(false);
+          }
+        );
+
+        return () => unsubscribe(); // cleanups
       }
     };
+
     fetchCart();
-  }, []);
+  }, [user]);
 
   const handleAuthClick = () => {
     if (user) {
@@ -38,10 +50,6 @@ export default function Header() {
     } else {
       loginWithGoogle().catch(console.error);
     }
-  };
-
-  const getLocalCart = () => {
-    return JSON.parse(localStorage.getItem("cart")) || [];
   };
 
   return (
@@ -58,27 +66,18 @@ export default function Header() {
           <Link to="products" className="mr-6 cursor-pointer">
             PRODUCTS
           </Link>
-
           {user?.isAdmin && (
             <Link to="edit" className="mr-6 cursor-pointer">
               EDIT
             </Link>
           )}
-
           <span className="mr-6 cursor-pointer" onClick={handleAuthClick}>
             {user ? "LOG OUT" : "LOG IN"}
           </span>
-
-          {user ? (
-            <Link to="cart" className="cursor-pointer">
-              SHOPPING BAG [
-              {cartItems && cartItems.length > 0 ? cartItems.length : 0}]
-            </Link>
-          ) : (
-            <span onClick={handleAuthClick} className="cursor-pointer">
-              SHOPPING BAG [0]
-            </span>
-          )}
+          <Link to="cart" className="cursor-pointer">
+            SHOPPING BAG [
+            {cartItems && cartItems.length > 0 ? cartItems.length : 0}]
+          </Link>
         </div>
       )}
     </header>

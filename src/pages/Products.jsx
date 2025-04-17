@@ -34,6 +34,7 @@ export default function Products() {
         <ul className="grid grid-cols-2 md:grid-cols-4 gap-[3rem] p-0">
           {products.map((product) => (
             <ProductCard
+              key={product.id}
               id={product.id}
               name={product.name}
               price={product.price}
