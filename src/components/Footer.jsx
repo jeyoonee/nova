@@ -6,7 +6,6 @@ export default function Footer() {
   ];
 
   const sns = [
-    "NEWSLETTER",
     "TIKTOK",
     "INSTAGRAM",
     "FACEBOOK",
@@ -27,6 +26,16 @@ export default function Footer() {
     "ZARA EXPERIENCES",
   ];
 
+  const followUs = [
+    "NEWSLETTER",
+    "TIKTOK",
+    "INSTAGRAM",
+    "FACEBOOK",
+    "X",
+    "PINTEREST",
+    "YOUTUBE",
+  ];
+
   const company = [
     "ABOUT US",
     "JOIN LIFE",
@@ -43,30 +52,34 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="mt-20 text-[0.6875rem] font-light tracking-[0.05rem] flex justify-center">
-      <div>
-        <p>JOIN OUR NEWSLETTER</p>
-        {sns.map((el, idx) => (
-          <span key={idx} className={idx === sns.length - 1 ? "" : "mr-[1rem]"}>
-            {el}
-          </span>
+    <footer className="my-50 px-28 text-[10px] font-light tracking-[0.05rem] flex ">
+      <div className="flex flex-col mr-5 max-w-[150px]">
+        <h2 className="font-normal mb-3">HELP</h2>
+        {help.map((el) => (
+          <span className="cursor-pointer mb-1">{el}</span>
         ))}
       </div>
-      <p>
-        {items.map((item, idx) => (
-          <span
-            key={idx}
-            className={idx === items.length - 1 ? "" : "mr-[1rem]"}
-          >
-            {item}
-          </span>
-        ))}
-      </p>
 
-      <p>
-        <span> ENGLISH </span>
-        <span>© All rights reserved</span>
-      </p>
+      <div className="flex flex-col mx-5 max-w-[150px]">
+        <h2 className="font-normal mb-3">FOLLOW US</h2>
+        {followUs.map((el) => (
+          <span className="cursor-pointer mb-1">{el}</span>
+        ))}
+      </div>
+
+      <div className="flex flex-col mx-5 max-w-[150px]">
+        <h2 className="font-normal mb-3">COMPANY</h2>
+        {company.map((el) => (
+          <span className="cursor-pointer mb-1">{el}</span>
+        ))}
+      </div>
+
+      <div className="flex flex-col mx-5 max-w-[150px]">
+        <h2 className="font-normal mb-3">POLICIES</h2>
+        {policies.map((el) => (
+          <span className="cursor-pointer mb-1">{el}</span>
+        ))}
+      </div>
     </footer>
   );
 }

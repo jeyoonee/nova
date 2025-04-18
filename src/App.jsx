@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { mergeCartsOnLogin } from "./services/cartService";
@@ -7,6 +7,9 @@ import { useUser } from "./context/UserContext";
 
 function App() {
   const { user } = useUser();
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+  const isCart = location.pathname === "/cart";
 
   useEffect(() => {
     if (user) {
@@ -18,7 +21,7 @@ function App() {
     <>
       <Header />
       <Outlet />
-      <Footer />
+      {!isHome && !isCart && <Footer />}
     </>
   );
 }

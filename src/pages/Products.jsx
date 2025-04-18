@@ -1,7 +1,7 @@
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../utils/firebaseConfig";
-import ProductCard from "./ProductCard";
+import ProductCard from "../components/ProductCard";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
