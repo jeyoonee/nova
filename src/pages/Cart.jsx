@@ -11,6 +11,7 @@ export default function Cart() {
 
   const [cartItems, setCartItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const isSameItem = (a, b) =>
     a.productId === b.productId && a.option === b.option;
@@ -100,10 +101,20 @@ export default function Cart() {
     fetchCart();
   }, [user]);
 
+  useEffect(() => {
+    if (cartItems) {
+      const total = cartItems.reduce(
+        (acc, item) => acc + item.price * item.quantity,
+        0
+      );
+      setTotalPrice(total);
+    }
+  }, [cartItems]);
+
   if (isLoading) return <p>로딩 중입니다...</p>;
 
   return (
-    <div className="p-5 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+    <div className="p-5 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-5 mb-[100px]">
       {cartItems.length > 0
         ? cartItems.map((item) => (
             <CartItem
@@ -114,6 +125,23 @@ export default function Cart() {
             />
           ))
         : "엄서용"}
+
+      {/* 하단 고정 총액 표시 */}
+      <div className="fixed bottom-0 left-0 w-full bg-white border-t-[0.025rem] px-6 py-4 flex justify-between items-center z-50 shadow-md text-[11px] font-light max-w-full overflow-x-auto sm:px-8">
+        <span>
+          TOTAL
+          <span className="ml-8">
+            ${" "}
+            {totalPrice.toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
+          </span>
+        </span>
+        <button className="bg-black text-white text-center  rounded-0 hover:bg-[#333333] cursor-pointer transition h-10 w-[168px]">
+          BUY
+        </button>
+      </div>
     </div>
   );
 }

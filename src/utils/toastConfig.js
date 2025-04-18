@@ -13,7 +13,7 @@ const commonStyle = {
 };
 
 // 성공 토스트
-export const showSuccess = (message = "Saved Change") =>
+export const showSuccess = (message = "SAVED CHANGE") =>
   toast.success(message, {
     icon: "✓",
     duration: 1500,

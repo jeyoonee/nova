@@ -1,5 +1,6 @@
 import { IoTrashBin } from "react-icons/io5";
 import { useUser } from "../context/UserContext";
+import { HiMinus, HiPlus } from "react-icons/hi2";
 
 export default function CartItem({ product, handleDelete, handleQuantity }) {
   const { user } = useUser();
@@ -20,7 +21,7 @@ export default function CartItem({ product, handleDelete, handleQuantity }) {
             className=" text-[12px] cursor-pointer"
             onClick={() => handleQuantity(product, "-")}
           >
-            -
+            <HiMinus />
           </button>
           <input
             type="text"
@@ -32,7 +33,7 @@ export default function CartItem({ product, handleDelete, handleQuantity }) {
             className="cursor-pointer text-[12px]"
             onClick={() => handleQuantity(product, "+")}
           >
-            +
+            <HiPlus />
           </button>
           <span
             className="cursor-pointer"
