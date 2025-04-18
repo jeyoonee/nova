@@ -5,7 +5,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { getDoc, doc } from "firebase/firestore";
-import { auth, db } from "../firebaseConfig";
+import { auth, db } from "../utils/firebaseConfig";
 
 const provider = new GoogleAuthProvider();
 

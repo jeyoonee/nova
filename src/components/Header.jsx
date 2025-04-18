@@ -1,5 +1,5 @@
 import { collection, getDocs, onSnapshot, doc } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+import { db } from "../utils/firebaseConfig";
 import { Link } from "react-router-dom";
 import {
   loginWithGoogle,

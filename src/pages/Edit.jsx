@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { uploadImageToCloudinary } from "../services/cloudinaryService";
-import { db } from "../firebaseConfig";
+import { db } from "../utils/firebaseConfig";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useUser } from "../context/UserContext";
 
@@ -32,9 +32,6 @@ export default function Edit() {
     try {
       const uploadedUrl = await uploadImageToCloudinary(file);
       setImageUrl(uploadedUrl);
-
-      console.log("현재 유저:", user); // context든 auth().currentUser든
-      console.log("이미지 URL:", imageUrl);
 
       await addDoc(collection(db, "products"), {
         name: form.name,

@@ -10,6 +10,7 @@ import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 import Edit from "./pages/Edit";
 import { UserProvider } from "./context/UserContext";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <UserProvider>
       <RouterProvider router={router} />
+      <Toaster position="top-center" reverseOrder={false} />
     </UserProvider>
   </StrictMode>
 );

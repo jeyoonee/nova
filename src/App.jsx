@@ -3,7 +3,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { mergeCartsOnLogin } from "./services/cartService";
 import { useEffect } from "react";
-import { useUser } from "./context/userContext";
+import { useUser } from "./context/UserContext";
 
 function App() {
   const { user } = useUser();

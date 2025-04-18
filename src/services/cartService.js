@@ -1,5 +1,5 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+import { db } from "../utils/firebaseConfig";
 
 export const saveToFirestore = async (uid, product) => {
   const cartRef = doc(db, "carts", uid);
@@ -80,7 +80,6 @@ export const mergeCartsOnLogin = async (uid) => {
       merged.push(localItem);
     }
   });
-
   // 4. 파이어스토어에 저장
   await setDoc(cartDocRef, { items: merged });
 

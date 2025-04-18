@@ -1,7 +1,7 @@
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { db } from "../firebaseConfig";
+import { db } from "../utils/firebaseConfig";
 import { saveToFirestore, saveToLocalStorage } from "../services/cartService";
 import { useUser } from "../context/UserContext";
 
@@ -37,7 +37,6 @@ export default function ProductDetail() {
   }, [id]);
 
   const addToCart = async (product) => {
-    console.log("카트에 담길 것", product);
     if (user) {
       // 로그인 했을 경우 - firestore에 저장
       saveToFirestore(user.uid, product);
