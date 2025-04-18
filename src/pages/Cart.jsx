@@ -4,7 +4,7 @@ import { getLocalCart } from "../services/cartService";
 import { useUser } from "../context/UserContext";
 import { useState, useEffect } from "react";
 import CartItem from "../components/CartItem";
-import { showSuccess, showError, showToast } from "../utils/toastConfig";
+import { showSuccess, showError } from "../utils/toastConfig";
 
 export default function Cart() {
   const { user } = useUser();

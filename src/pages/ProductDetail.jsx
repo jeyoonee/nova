@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { db } from "../utils/firebaseConfig";
 import { saveToFirestore, saveToLocalStorage } from "../services/cartService";
 import { useUser } from "../context/UserContext";
+import { showSuccess, showError } from "../utils/toastConfig";
 
 export default function ProductDetail() {
   const [product, setProduct] = useState([]);
@@ -44,6 +45,7 @@ export default function ProductDetail() {
       // 비로그인 - localStorage에 저장
       saveToLocalStorage(product);
     }
+    showSuccess("ADDED TO YOUR BASKET");
   };
 
   const handleChange = (e) => {
