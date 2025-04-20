@@ -1,10 +1,7 @@
 import { IoTrashBin } from "react-icons/io5";
-import { useUser } from "../context/UserContext";
 import { HiMinus, HiPlus } from "react-icons/hi2";
 
 export default function CartItem({ product, handleDelete, handleQuantity }) {
-  const { user } = useUser();
-
   return (
     <div className="flex flex-col cursor-pointer font-light text-[11px] w-full">
       <div className="w-full">

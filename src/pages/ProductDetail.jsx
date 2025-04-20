@@ -2,16 +2,14 @@ import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../utils/firebaseConfig";
-import { saveToFirestore, saveToLocalStorage } from "../services/cartService";
-import { useUser } from "../context/UserContext";
-import { showSuccess, showError } from "../utils/toastConfig";
+import { useCart } from "../context/CartContext";
 
 export default function ProductDetail() {
   const [product, setProduct] = useState([]);
-  const [cartItem, setCartItem] = useState(null);
+  const [option, setOption] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
-  const { user } = useUser();
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -20,14 +18,6 @@ export default function ProductDetail() {
         const doc = snapshot.docs.find((doc) => doc.id === id);
         const item = doc ? { id: doc.id, ...doc.data() } : null;
         setProduct(item);
-        setCartItem({
-          productId: item.id,
-          name: item.name,
-          imageUrl: item.imageUrl,
-          price: item.price,
-          quantity: 1,
-          option: item.options?.[0],
-        });
       } catch (err) {
         console.error(err);
       } finally {
@@ -37,22 +27,14 @@ export default function ProductDetail() {
     fetchProduct();
   }, [id]);
 
-  const addToCart = async (product) => {
-    if (user) {
-      // 로그인 했을 경우 - firestore에 저장
-      saveToFirestore(user.uid, product);
-    } else {
-      // 비로그인 - localStorage에 저장
-      saveToLocalStorage(product);
+  useEffect(() => {
+    if (product && product.options?.length > 0) {
+      setOption(product.options[0]);
     }
-    showSuccess("ADDED TO YOUR BASKET");
-  };
+  }, [product]);
 
   const handleChange = (e) => {
-    setCartItem((prev) => ({
-      ...prev,
-      option: e.target.value,
-    }));
+    setOption(e.target.value);
   };
 
   if (isLoading) return <p>Loading...</p>;
@@ -72,11 +54,11 @@ export default function ProductDetail() {
           <span className="mb-4 text-[16px]">$ {product.price.toFixed(2)}</span>
         </div>
 
-        {product.options.length > 0 ? (
+        {product?.options?.length > 1 ? (
           <select
             name="options"
             onChange={handleChange}
-            value={cartItem?.option || ""}
+            value={option ? option : ""}
           >
             {product.options.map((option) => (
               <option key={option} value={option}>
@@ -85,12 +67,21 @@ export default function ProductDetail() {
             ))}
           </select>
         ) : (
-          <></>
+          <div></div>
         )}
 
         <button
-          className="w-full h-10 border-[0.03125rem] text-[11px] cursor-pointer"
-          onClick={() => addToCart(cartItem)}
+          className="w-full h-10 border text-[11px] cursor-pointer"
+          onClick={() =>
+            addToCart({
+              productId: product.id,
+              name: product.name,
+              imageUrl: product.imageUrl,
+              price: product.price,
+              quantity: 1,
+              option: option ?? product.options?.[0],
+            })
+          }
         >
           ADD
         </button>

@@ -10,6 +10,7 @@ import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 import Edit from "./pages/Edit";
 import { UserProvider } from "./context/UserContext";
+import { CartProvider } from "./context/CartContext";
 import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter([
@@ -30,8 +31,10 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <UserProvider>
-      <RouterProvider router={router} />
-      <Toaster position="top-center" reverseOrder={false} />
+      <CartProvider>
+        <RouterProvider router={router} />
+        <Toaster position="top-center" reverseOrder={false} />
+      </CartProvider>
     </UserProvider>
   </StrictMode>
 );

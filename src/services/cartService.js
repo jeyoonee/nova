@@ -1,4 +1,5 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import { IoConstructOutline } from "react-icons/io5";
 import { db } from "../utils/firebaseConfig";
 
 export const saveToFirestore = async (uid, product) => {
@@ -12,10 +13,11 @@ export const saveToFirestore = async (uid, product) => {
   }
 
   // 이미 같은 상품+옵션이 담겨있다면 수량만 증가
-  const index = items.findIndex(
-    (item) =>
+  const index = items.findIndex((item) => {
+    return (
       item.productId === product.productId && item.option === product.option
-  );
+    );
+  });
 
   if (index >= 0) {
     items[index].quantity += product.quantity;
@@ -85,4 +87,6 @@ export const mergeCartsOnLogin = async (uid) => {
 
   // 5. 로컬 카트 비우기
   clearLocalCart();
+
+  return merged;
 };
