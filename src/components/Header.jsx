@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { loginWithGoogle, logout } from "../services/authService";
 import { useUser } from "../context/UserContext";
 import { useCart } from "../context/CartContext";
+import { LiaShoppingBagSolid } from "react-icons/lia";
 
 export default function Header() {
   const { user } = useUser();
@@ -16,20 +17,38 @@ export default function Header() {
   };
 
   return (
-    <header className="flex w-full justify-between h-[245px] px-[48px] py-[20px]">
-      <Link to="/">
-        <img src="/logo.png" alt="nova logo" className="w-[262px] h-[109px]" />
-      </Link>
-      <div className="text-[0.6875rem] font-light tracking-[0.05rem]">
-        <Link to="products" className="mr-6 cursor-pointer">
+    <header className="flex flex-col lg:flex-row w-full items-center lg:justify-between lg:h-[245px] px-12 py-5">
+      {/* 상단 우측 영역 (LOG IN/OUT + 장바구니) - 작은화면 전용 */}
+      <div className="w-full flex justify-end items-center gap-4 mb-4 lg:hidden text-[0.6875rem] font-light tracking-[0.05rem]">
+        <span className="cursor-pointer" onClick={handleAuthClick}>
+          {user ? "LOG OUT" : "LOG IN"}
+        </span>
+        <Link to="/cart" className="relative cursor-pointer">
+          <LiaShoppingBagSolid className="text-lg" />
+        </Link>
+      </div>
+
+      {/* 로고 */}
+      <div className="w-full lg:w-auto flex justify-center lg:justify-start">
+        <Link to="/">
+          <img
+            src="/logo.png"
+            alt="nova logo"
+            className="w-[262px] h-[109px]"
+          />
+        </Link>
+      </div>
+
+      <div className="hidden lg:flex items-center gap-6 text-[0.6875rem] font-light tracking-[0.05rem]">
+        <Link to="products" className="cursor-pointer">
           PRODUCTS
         </Link>
         {user?.isAdmin && (
-          <Link to="edit" className="mr-6 cursor-pointer">
+          <Link to="edit" className="cursor-pointer">
             EDIT
           </Link>
         )}
-        <span className="mr-6 cursor-pointer" onClick={handleAuthClick}>
+        <span className="cursor-pointer" onClick={handleAuthClick}>
           {user ? "LOG OUT" : "LOG IN"}
         </span>
         <Link to="cart" className="cursor-pointer">
