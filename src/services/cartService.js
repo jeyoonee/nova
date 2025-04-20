@@ -22,7 +22,7 @@ export const saveToFirestore = async (uid, product) => {
   if (index >= 0) {
     items[index].quantity += product.quantity;
   } else {
-    items.push(product);
+    items.unshift(product);
   }
 
   await setDoc(cartRef, {

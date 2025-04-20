@@ -58,7 +58,7 @@ export function CartProvider({ children }) {
         items: updatedItems,
       });
       setCart(updatedItems);
-      showSuccess();
+      showSuccess("DELETED ITEM");
     } else {
       const localCart = getLocalCart();
       const updatedCart = localCart.filter(
@@ -66,7 +66,7 @@ export function CartProvider({ children }) {
       );
       saveToLocalStorage(updatedCart);
       setCart(updatedCart);
-      showSuccess();
+      showSuccess("DELETED ITEM");
     }
   };
 

@@ -1,9 +1,15 @@
 import { IoTrashBin } from "react-icons/io5";
 import { HiMinus, HiPlus } from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
 
 export default function CartItem({ product, handleDelete, handleQuantity }) {
+  const navigate = useNavigate();
+
   return (
-    <div className="flex flex-col cursor-pointer font-light text-[11px] w-full">
+    <div
+      className="flex flex-col cursor-pointer font-light text-[11px] w-full"
+      onClick={() => navigate(`/products/${product.productId}`)}
+    >
       <div className="w-full">
         <img src={product.imageUrl} alt={product.name} className="w-full" />
       </div>
