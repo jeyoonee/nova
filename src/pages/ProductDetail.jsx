@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../utils/firebaseConfig";
 import { useCart } from "../context/CartContext";
+import OptionDropdown from "../components/OptionDropdown";
 
 export default function ProductDetail() {
   const [product, setProduct] = useState([]);
-  const [option, setOption] = useState(null);
+  const [showOptions, setShowOptions] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
   const { addToCart } = useCart();
@@ -27,14 +28,16 @@ export default function ProductDetail() {
     fetchProduct();
   }, [id]);
 
-  useEffect(() => {
-    if (product && product.options?.length > 0) {
-      setOption(product.options[0]);
-    }
-  }, [product]);
-
-  const handleChange = (e) => {
-    setOption(e.target.value);
+  const handleSelect = (selectedOption) => {
+    addToCart({
+      productId: product.id,
+      name: product.name,
+      imageUrl: product.imageUrl,
+      price: product.price,
+      quantity: 1,
+      option: selectedOption,
+    });
+    setShowOptions(false);
   };
 
   if (isLoading) return <p>Loading...</p>;
@@ -45,50 +48,34 @@ export default function ProductDetail() {
       <img
         src={product.imageUrl}
         alt={product.name}
-        className="basis-1/3 aspect-[2/3] w-full object-cover"
+        className="basis-[55%] aspect-[2/3] w-full object-cover"
       />
 
-      <div className="flex flex-col text-[#000000] ml-[58px] w-full pt-12 pr-5 basis-2/3 gap-[2rem] font-light">
-        <div className="border-b-[0.03125rem] pb-[2rem]">
-          <h1 className=" text-[18px]">{product.name}</h1>
-          <span className="mb-4 text-[16px]">$ {product.price.toFixed(2)}</span>
+      <div className="basis-[45%] flex flex-col text-[#000000] pt-12 pr-5 gap-[2rem] font-light">
+        <div className="border-b-[0.03125rem] pb-[2rem] text-[18px]">
+          <h1>{product.name}</h1>
+          <span className="mb-4">$ {product.price.toFixed(2)}</span>
         </div>
 
-        {product?.options?.length > 1 ? (
-          <select
-            name="options"
-            onChange={handleChange}
-            value={option ? option : ""}
-          >
-            {product.options.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        ) : (
-          <div></div>
-        )}
+        <div className="relative w-full">
+          {!showOptions ? (
+            <button
+              className="w-full h-10 border text-[11px] cursor-pointer"
+              onClick={() => setShowOptions(true)}
+            >
+              ADD
+            </button>
+          ) : (
+            <OptionDropdown
+              options={product.options ?? []}
+              onSelect={handleSelect}
+            />
+          )}
+        </div>
 
-        <button
-          className="w-full h-10 border text-[11px] cursor-pointer"
-          onClick={() =>
-            addToCart({
-              productId: product.id,
-              name: product.name,
-              imageUrl: product.imageUrl,
-              price: product.price,
-              quantity: 1,
-              option: option ?? product.options?.[0],
-            })
-          }
-        >
-          ADD
-        </button>
+        <p className="text-[13px] my-[2rem]">{product.description}</p>
 
-        <p className="text-xs">{product.description}</p>
-
-        <div className="text-[10px]">
+        <div className="text-[10px] flex flex-col">
           <span className="mb-3 cursor-pointer">PRODUCT MEASUREMENTS</span>
           <span className="mb-3 cursor-pointer">
             COMPOSITION, CARE & ORIGIN
