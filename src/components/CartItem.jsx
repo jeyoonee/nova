@@ -6,11 +6,11 @@ export default function CartItem({ product, handleDelete, handleQuantity }) {
   const navigate = useNavigate();
 
   return (
-    <div
-      className="flex flex-col cursor-pointer font-light text-[11px] w-full"
-      onClick={() => navigate(`/products/${product.productId}`)}
-    >
-      <div className="w-full">
+    <div className="flex flex-col cursor-pointer font-light text-[11px] w-full">
+      <div
+        className="w-full"
+        onClick={() => navigate(`/products/${product.productId}`)}
+      >
         <img src={product.imageUrl} alt={product.name} className="w-full" />
       </div>
       <div className="py-3 leading-[1.25rem]">

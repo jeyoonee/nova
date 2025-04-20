@@ -40,6 +40,21 @@ export default function ProductDetail() {
     setShowOptions(false);
   };
 
+  const handleClickAdd = () => {
+    if (product?.options && product.options.length === 1) {
+      addToCart({
+        productId: product.id,
+        name: product.name,
+        imageUrl: product.imageUrl,
+        price: product.price,
+        quantity: 1,
+        option: product.options[0],
+      });
+    } else {
+      setShowOptions(true);
+    }
+  };
+
   if (isLoading) return <p>Loading...</p>;
   if (!product) return <p>상품 정보를 찾을 수 없습니다.</p>;
 
@@ -61,7 +76,7 @@ export default function ProductDetail() {
           {!showOptions ? (
             <button
               className="w-full h-10 border text-[11px] cursor-pointer"
-              onClick={() => setShowOptions(true)}
+              onClick={handleClickAdd}
             >
               ADD
             </button>

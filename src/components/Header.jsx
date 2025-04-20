@@ -17,7 +17,7 @@ export default function Header() {
   };
 
   return (
-    <header className="flex flex-col lg:flex-row w-full items-center lg:justify-between lg:h-[245px] px-12 py-5">
+    <header className="flex flex-col lg:flex-row w-full items-start lg:justify-between lg:h-[245px] px-12 py-5">
       {/* 상단 우측 영역 (LOG IN/OUT + 장바구니) - 작은화면 전용 */}
       <div className="w-full flex justify-end items-center gap-4 mb-4 lg:hidden text-[0.6875rem] font-light tracking-[0.05rem]">
         <span className="cursor-pointer" onClick={handleAuthClick}>
