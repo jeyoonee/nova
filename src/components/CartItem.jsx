@@ -25,6 +25,7 @@ export default function CartItem({ product, handleDelete, handleQuantity }) {
             aria-disabled
             className="w-4 text-center bg-transparent outline-nonetext-black border-none"
             value={product.quantity}
+            onChange={() => {}}
           />
           <button
             className="cursor-pointer text-[12px]"

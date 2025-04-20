@@ -1,4 +1,4 @@
-import { getDoc, doc } from "firebase/firestore";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { db } from "../utils/firebaseConfig";
 import {
   clearLocalCart,
@@ -58,6 +58,7 @@ export function CartProvider({ children }) {
         items: updatedItems,
       });
       setCart(updatedItems);
+      showSuccess();
     } else {
       const localCart = getLocalCart();
       const updatedCart = localCart.filter(
@@ -65,6 +66,7 @@ export function CartProvider({ children }) {
       );
       saveToLocalStorage(updatedCart);
       setCart(updatedCart);
+      showSuccess();
     }
   };
 
@@ -96,7 +98,6 @@ export function CartProvider({ children }) {
           items: updatedItems,
         });
         setCart(updatedItems);
-
         showSuccess();
       } catch (err) {
         console.error("수량 업데이트 실패", err);
