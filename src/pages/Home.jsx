@@ -5,7 +5,7 @@ export default function Home() {
     <>
       <Link
         to="products"
-        className="w-full flex items-center justify-center bg-white px-20"
+        className="w-full flex items-center justify-center bg-white px-0 sm:px-20"
         style={{ height: "calc(100vh - 245px - 100px)" }}
       >
         <video
@@ -13,7 +13,7 @@ export default function Home() {
           muted
           loop
           playsInline
-          className="max-w-full max-h-full object-contain"
+          className="w-full h-full sm:object-contain sm:max-w-full sm:max-h-full md:aspect-video aspect-[9/16]"
           src="https://res.cloudinary.com/ds3yde7ji/video/upload/v1744630860/nova_video_aqyavm.mp4"
         />
       </Link>
