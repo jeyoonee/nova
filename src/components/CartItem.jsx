@@ -13,7 +13,7 @@ export default function CartItem({ product, handleDelete, handleQuantity }) {
       {/* 삭제 버튼 */}
       <button
         onClick={() => handleDelete(product)}
-        className="absolute top-2 right-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer hidden md:inline"
+        className="absolute top-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer hidden md:inline"
       >
         <TfiClose className="text-[12px]" />
       </button>
@@ -21,7 +21,7 @@ export default function CartItem({ product, handleDelete, handleQuantity }) {
       {/* 이미지 + 내용 (모바일에서는 가로 배치) */}
       <div className="flex sm:flex-row gap-3 md:gap-0 md:flex-col lg:flex-col xl:flex-col 2xl:flex-col cursor-pointer">
         <div
-          className="w-full basis-1/2 md:basis-auto aspect-[2/3] md:aspect-auto"
+          className="w-full basis-1/2 md:basis-auto aspect-[2/3] md:aspect-auto min-w-[168px] md:min-w-auto"
           onClick={() => navigate(`/products/${product.productId}`)}
         >
           <img
@@ -32,7 +32,7 @@ export default function CartItem({ product, handleDelete, handleQuantity }) {
         </div>
         <div className="ml-3 mt-2 spy-3 leading-[1.25rem] flex flex-col justify-between">
           <div>
-            <div className="flex w-full justify-between">
+            <div className="flex flex-col md:flex-row w-full justify-between">
               <span>{product.name}</span>
               <span className="mr-2">{product.option}</span>
             </div>
