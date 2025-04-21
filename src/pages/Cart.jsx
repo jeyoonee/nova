@@ -17,7 +17,7 @@ export default function Cart() {
   }, [cart]);
 
   return (
-    <div className="p-5 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-5 mb-[100px]">
+    <div className="p-5 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 mb-40">
       {cart.length > 0 ? (
         cart.map((item) => (
           <CartItem
@@ -34,7 +34,7 @@ export default function Cart() {
       )}
 
       {/* 하단 고정 총액 표시 */}
-      <div className="fixed bottom-0 left-0 w-full bg-white border-t-[0.025rem] px-6 py-4 flex justify-between items-center z-50 shadow-md text-[11px] font-light max-w-full overflow-x-auto sm:px-8">
+      <div className="fixed bottom-0 left-0 w-full bg-white border-t-[0.025rem] px-6 py-4 flex justify-between items-center z-50 shadow-md text-[12.5px] font-light max-w-full overflow-x-auto sm:px-8">
         <span>
           TOTAL
           <span className="ml-8">
