@@ -3,15 +3,10 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBL-UJEIPfUKjNQysJUqoC_woSI0CPu4Nw",
-  authDomain: "shoppy-828b2.firebaseapp.com",
-  databaseURL:
-    "https://shoppy-828b2-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "shoppy-828b2",
-  storageBucket: "shoppy-828b2.firebasestorage.app",
-  messagingSenderId: "426903921607",
-  appId: "1:426903921607:web:d5b9ca445fc1c86d122fe2",
-  measurementId: "G-LXX9H9N97J",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  databaseURL: import.meta.env.VITE_FIREBASE_DB_URL,
+  projectId: import.meta.env.ITE_FIREBASE_PROJECT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
