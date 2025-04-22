@@ -1,7 +1,7 @@
 import { Cloudinary } from "@cloudinary/url-gen";
 
 const cld = new Cloudinary({
-  cloud: { cloudName: "ds3yde7ji" },
+  cloud: { cloudName: import.meta.env.VITE_CLOUDINARY_CLOUDNAME },
 });
 
 export const uploadImageToCloudinary = async (file) => {
@@ -10,7 +10,9 @@ export const uploadImageToCloudinary = async (file) => {
   formData.append("upload_preset", "nova_unsigned"); // 실제
 
   const res = await fetch(
-    "https://api.cloudinary.com/v1_1/ds3yde7ji/image/upload",
+    `https://api.cloudinary.com/v1_1/${
+      import.meta.env.VITE_CLOUDINARY_CLOUDNAME
+    }/image/upload`,
     {
       method: "POST",
       body: formData,
