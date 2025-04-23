@@ -9,13 +9,17 @@ import { auth, db } from "../utils/firebaseConfig";
 
 const provider = new GoogleAuthProvider();
 
-export const loginWithGoogle = () => signInWithPopup(auth, provider);
+export const loginWithGoogle = () => {
+  localStorage.setItem("isLoggedIn", "true"); // 로그인 시 로컬 스토리지에 저장
+  return signInWithPopup(auth, provider);
+};
 
 export const logout = () => {
   const uid = auth.currentUser?.uid;
   if (uid) {
     localStorage.removeItem(`admin:${uid}`);
   }
+  localStorage.removeItem("isLoggedIn");
   return signOut(auth);
 };
 

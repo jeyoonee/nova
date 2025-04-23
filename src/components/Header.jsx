@@ -3,10 +3,18 @@ import { loginWithGoogle, logout } from "../services/authService";
 import { useUser } from "../context/UserContext";
 import { useCart } from "../context/CartContext";
 import { LiaShoppingBagSolid } from "react-icons/lia";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const { user } = useUser();
   const { cart } = useCart();
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("isLoggedIn") === "true"
+  );
+
+  useEffect(() => {
+    setIsLoggedIn(!!user);
+  }, [user]);
 
   const handleAuthClick = () => {
     if (user) {
@@ -21,7 +29,7 @@ export default function Header() {
       {/* 상단 우측 영역 (LOG IN/OUT + 장바구니) - 작은화면 전용 */}
       <div className="w-full flex justify-end items-center gap-4 mb-4 lg:hidden text-[0.6875rem] font-light tracking-[0.05rem]">
         <span className="cursor-pointer" onClick={handleAuthClick}>
-          {user ? "LOG OUT" : "LOG IN"}
+          {isLoggedIn ? "LOG OUT" : "LOG IN"}
         </span>
         <Link to="/cart" className="relative cursor-pointer">
           <LiaShoppingBagSolid className="text-lg" />

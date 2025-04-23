@@ -16,8 +16,10 @@ export function UserProvider({ children }) {
       if (firebaseUser) {
         const isAdmin = await getUserRole(firebaseUser.uid);
         setUser({ ...firebaseUser, isAdmin });
+        localStorage.setItem("isLoggedIn", "true"); // 로그인 상태 업데이트
       } else {
         setUser(null);
+        localStorage.removeItem("isLoggedIn"); // 로그아웃 상태 업데이트
       }
     });
 
