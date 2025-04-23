@@ -58,28 +58,36 @@ export default function Footer() {
         <div className="flex flex-col max-w-[150px]">
           <h2 className="font-semibold text-gray-600 mb-3">HELP</h2>
           {help.map((el) => (
-            <span className="cursor-pointer mb-1">{el}</span>
+            <span key={el} className="cursor-pointer mb-1">
+              {el}
+            </span>
           ))}
         </div>
 
         <div className="flex flex-col mx-5 max-w-[150px]">
           <h2 className="font-semibold text-gray-600 mb-3">FOLLOW US</h2>
           {followUs.map((el) => (
-            <span className="cursor-pointer mb-1">{el}</span>
+            <span key={el} className="cursor-pointer mb-1">
+              {el}
+            </span>
           ))}
         </div>
 
         <div className="flex flex-col mx-5 max-w-[150px]">
           <h2 className="font-semibold text-gray-600 mb-3">COMPANY</h2>
           {company.map((el) => (
-            <span className="cursor-pointer mb-1">{el}</span>
+            <span key={el} className="cursor-pointer mb-1">
+              {el}
+            </span>
           ))}
         </div>
 
         <div className="flex flex-col mx-5 max-w-[150px]">
           <h2 className="font-semibold text-gray-600 mb-3">POLICIES</h2>
           {policies.map((el) => (
-            <span className="cursor-pointer mb-1">{el}</span>
+            <span key={el} className="cursor-pointer mb-1">
+              {el}
+            </span>
           ))}
         </div>
       </div>
