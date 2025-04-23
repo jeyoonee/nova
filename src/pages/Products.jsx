@@ -25,8 +25,8 @@ export default function Products() {
   if (error) return <p className="text-red-500">Something went wrong 😖</p>;
 
   return (
-    <div className="px-[112px]">
-      <ul className="grid grid-cols-2 md:grid-cols-4 gap-[3rem] p-0">
+    <div className="px-4 md:px-[112px]">
+      <ul className="grid grid-cols-2 md:grid-cols-4 gap-6 p-0">
         {products.map((product) => (
           <ProductCard
             key={product.id}
