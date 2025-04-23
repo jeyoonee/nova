@@ -1,5 +1,5 @@
 import { collection, getDocs } from "firebase/firestore";
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../utils/firebaseConfig";
 import { useCart } from "../context/CartContext";
@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export default function ProductDetail() {
   const [showOptions, setShowOptions] = useState(false);
+  const dropdownRef = useRef(null);
   const { id } = useParams();
   const { addToCart } = useCart();
 
@@ -24,6 +25,23 @@ export default function ProductDetail() {
       return item;
     },
   });
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        showOptions &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target)
+      ) {
+        setShowOptions(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showOptions]);
 
   const handleSelect = (selectedOption) => {
     addToCart({
@@ -72,7 +90,7 @@ export default function ProductDetail() {
           <span className="mb-4">$ {product.price.toFixed(2)}</span>
         </div>
 
-        <div className="relative w-full">
+        <div className="relative w-full" ref={dropdownRef}>
           {!showOptions ? (
             <button
               className="w-full h-10 border text-[11px] cursor-pointer"
