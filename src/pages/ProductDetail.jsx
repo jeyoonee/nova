@@ -1,32 +1,29 @@
 import { collection, getDocs } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../utils/firebaseConfig";
 import { useCart } from "../context/CartContext";
 import OptionDropdown from "../components/OptionDropdown";
+import { useQuery } from "@tanstack/react-query";
 
 export default function ProductDetail() {
-  const [product, setProduct] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
   const { addToCart } = useCart();
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const snapshot = await getDocs(collection(db, "products"));
-        const doc = snapshot.docs.find((doc) => doc.id === id);
-        const item = doc ? { id: doc.id, ...doc.data() } : null;
-        setProduct(item);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchProduct();
-  }, [id]);
+  const {
+    data: product,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["product", id],
+    queryFn: async () => {
+      const snapshot = await getDocs(collection(db, "products"));
+      const doc = snapshot.docs.find((doc) => doc.id === id);
+      const item = doc ? { id: doc.id, ...doc.data() } : null;
+      return item;
+    },
+  });
 
   const handleSelect = (selectedOption) => {
     addToCart({
@@ -57,6 +54,9 @@ export default function ProductDetail() {
 
   if (isLoading) return <p>Loading...</p>;
   if (!product) return <p>상품 정보를 찾을 수 없습니다.</p>;
+  if (error) {
+    return <p className="text-red-500">Something went wrong 😖</p>;
+  }
 
   return (
     <section className="flex flex-col lg:flex-row px-12 w-full max-w-screen-xl m-auto gap-12 py-8">
