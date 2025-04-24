@@ -18,7 +18,7 @@ export default function Home() {
         />
 
         {/* 📱 Only visible on small screens */}
-        <span className="absolute bottom-6 text-[10px] text-black/60 font-light sm:hidden tracking-wide">
+        <span className="absolute bottom-4 mt-2 text-[10px] text-black/60 font-light sm:hidden tracking-wide">
           CLICK HERE
         </span>
       </Link>
