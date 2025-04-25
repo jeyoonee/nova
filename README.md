@@ -1,4 +1,4 @@
-# 🛍️ [Nova] (bit.ly/4jSJuhD)  
+# 🛍️ [Nova](https://bit.ly/4jSJuhD)  
 Click!  ⬆️ 
 
 A modern e-commerce web application inspired by ZARA, built using the latest frontend technologies.
