@@ -1,7 +1,7 @@
 # 🛍️ [Nova](https://bit.ly/4jSJuhD)  
 
 A modern e-commerce web application inspired by ZARA, built using the latest frontend technologies.
-Nova offers a seamless shopping experience with user authentication, product browsing, cart functionality, and smooth animations.
+Nova offers a seamless shopping experience with user authentication, product browsing, cart functionality, and smooth ddanimations.
 
 🔗 [View Project](https://bit.ly/4jSJuhD)
 
