@@ -36,7 +36,9 @@ export default function CartItem({ product, handleDelete, handleQuantity }) {
               <span>{product.name}</span>
               <span className="mr-2">{product.option}</span>
             </div>
-            <p className="mb-5 mr-2">$ {product.price.toFixed(2)}</p>
+            <p className="mb-5 mr-2">
+              $ {Number(product.price || 0).toFixed(2)}
+            </p>
             <div className="flex items-center space-x-4">
               <button
                 className=" text-[12px] cursor-pointer"
