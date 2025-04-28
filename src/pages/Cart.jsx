@@ -9,7 +9,7 @@ export default function Cart() {
   useEffect(() => {
     if (cart) {
       const total = cart.reduce(
-        (acc, item) => acc + NUmber(item.price || 0) * item.quantity,
+        (acc, item) => acc + Number(item.price || 0) * item.quantity,
         0
       );
       setTotalPrice(total);
