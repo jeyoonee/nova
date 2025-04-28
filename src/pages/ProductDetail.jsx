@@ -27,6 +27,10 @@ export default function ProductDetail() {
   });
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const handleClickOutside = (e) => {
       if (
         showOptions &&
