@@ -1,4 +1,4 @@
-# 🛍️ [Nova] (https://bit.ly/4jSJuhD](https://incandescent-alpaca-349709.netlify.app/)  
+# 🛍️ [Nova](https://incandescent-alpaca-349709.netlify.app/)  
 
 A modern e-commerce web application inspired by ZARA, built using the latest frontend technologies.
 Nova offers a seamless shopping experience with user authentication, product browsing, cart functionality, and smooth ddanimations.
